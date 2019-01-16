@@ -1,0 +1,34 @@
+PODS:
+  - IBMWatsonLanguageTranslatorV3 (1.2.0):
+    - IBMWatsonRestKit (~> 2.0.0)
+  - IBMWatsonRestKit (2.0.0)
+  - IBMWatsonSpeechToTextV1 (1.2.0):
+    - IBMWatsonRestKit (~> 2.0.0)
+    - Starscream (= 3.0.5)
+  - IBMWatsonTextToSpeechV1 (1.2.0):
+    - IBMWatsonRestKit (~> 2.0.0)
+  - Starscream (3.0.5)
+
+DEPENDENCIES:
+  - IBMWatsonLanguageTranslatorV3 (~> 1.2.0)
+  - IBMWatsonSpeechToTextV1 (~> 1.2.0)
+  - IBMWatsonTextToSpeechV1 (~> 1.2.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - IBMWatsonLanguageTranslatorV3
+    - IBMWatsonRestKit
+    - IBMWatsonSpeechToTextV1
+    - IBMWatsonTextToSpeechV1
+    - Starscream
+
+SPEC CHECKSUMS:
+  IBMWatsonLanguageTranslatorV3: 48c07843605203fdfba59cb20133c043b92824e4
+  IBMWatsonRestKit: 0a8d0f2f1cc757a0231729e9206e0b774cda0997
+  IBMWatsonSpeechToTextV1: caa5904622c803f5020af1600507cec7891be811
+  IBMWatsonTextToSpeechV1: 97eb3fd9c69dd6655032e844ea91479639b1bb49
+  Starscream: faf918b2f2eff7d5dd21180646bf015a669673bd
+
+PODFILE CHECKSUM: 74c7efcfe1dc3ece23d395cabcb489f75274a5bc
+
+COCOAPODS: 1.5.3

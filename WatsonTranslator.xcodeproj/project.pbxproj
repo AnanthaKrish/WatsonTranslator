@@ -14,6 +14,7 @@
 		92261E6721EA9A4C00A1A620 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92261E6521EA9A4C00A1A620 /* LaunchScreen.storyboard */; };
 		92261E7221EA9A4C00A1A620 /* WatsonTranslatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261E7121EA9A4C00A1A620 /* WatsonTranslatorTests.swift */; };
 		92261E7D21EA9A4C00A1A620 /* WatsonTranslatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261E7C21EA9A4C00A1A620 /* WatsonTranslatorUITests.swift */; };
+		B31A0668E45180A3F730FC22 /* Pods_WatsonTranslator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032CE86DCAFA58FE9F815175 /* Pods_WatsonTranslator.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		032CE86DCAFA58FE9F815175 /* Pods_WatsonTranslator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatsonTranslator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FA364166685A043F8799057 /* Pods-WatsonTranslator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsonTranslator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WatsonTranslator/Pods-WatsonTranslator.debug.xcconfig"; sourceTree = "<group>"; };
 		92261E5921EA9A4C00A1A620 /* WatsonTranslator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatsonTranslator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92261E5C21EA9A4C00A1A620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92261E5E21EA9A4C00A1A620 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +50,7 @@
 		92261E7821EA9A4C00A1A620 /* WatsonTranslatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WatsonTranslatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92261E7C21EA9A4C00A1A620 /* WatsonTranslatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatsonTranslatorUITests.swift; sourceTree = "<group>"; };
 		92261E7E21EA9A4C00A1A620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7DB395CA883F8B87089E838 /* Pods-WatsonTranslator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsonTranslator.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatsonTranslator/Pods-WatsonTranslator.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B31A0668E45180A3F730FC22 /* Pods_WatsonTranslator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +79,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D7527DBCA4B1D918D9B07AA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				032CE86DCAFA58FE9F815175 /* Pods_WatsonTranslator.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		92261E5021EA9A4C00A1A620 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +94,8 @@
 				92261E7021EA9A4C00A1A620 /* WatsonTranslatorTests */,
 				92261E7B21EA9A4C00A1A620 /* WatsonTranslatorUITests */,
 				92261E5A21EA9A4C00A1A620 /* Products */,
+				F30D27D9C22A2166256F03D0 /* Pods */,
+				5D7527DBCA4B1D918D9B07AA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +140,15 @@
 			path = WatsonTranslatorUITests;
 			sourceTree = "<group>";
 		};
+		F30D27D9C22A2166256F03D0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0FA364166685A043F8799057 /* Pods-WatsonTranslator.debug.xcconfig */,
+				B7DB395CA883F8B87089E838 /* Pods-WatsonTranslator.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +156,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 92261E8121EA9A4C00A1A620 /* Build configuration list for PBXNativeTarget "WatsonTranslator" */;
 			buildPhases = (
+				CBF58F368F0F8948DDEE3C47 /* [CP] Check Pods Manifest.lock */,
 				92261E5521EA9A4C00A1A620 /* Sources */,
 				92261E5621EA9A4C00A1A620 /* Frameworks */,
 				92261E5721EA9A4C00A1A620 /* Resources */,
+				28376D02787F74168E51EACF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -250,6 +276,61 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		28376D02787F74168E51EACF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WatsonTranslator/Pods-WatsonTranslator-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/IBMWatsonLanguageTranslatorV3/LanguageTranslator.framework",
+				"${BUILT_PRODUCTS_DIR}/IBMWatsonRestKit/RestKit.framework",
+				"${BUILT_PRODUCTS_DIR}/IBMWatsonSpeechToTextV1/SpeechToText.framework",
+				"${BUILT_PRODUCTS_DIR}/IBMWatsonTextToSpeechV1/TextToSpeech.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LanguageTranslator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RestKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SpeechToText.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextToSpeech.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WatsonTranslator/Pods-WatsonTranslator-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CBF58F368F0F8948DDEE3C47 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WatsonTranslator-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		92261E5521EA9A4C00A1A620 /* Sources */ = {
@@ -430,6 +511,7 @@
 		};
 		92261E8221EA9A4C00A1A620 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0FA364166685A043F8799057 /* Pods-WatsonTranslator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -448,6 +530,7 @@
 		};
 		92261E8321EA9A4C00A1A620 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7DB395CA883F8B87089E838 /* Pods-WatsonTranslator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
