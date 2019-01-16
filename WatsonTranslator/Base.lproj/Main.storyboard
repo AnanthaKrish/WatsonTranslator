@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +13,53 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WatsonTranslator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAb-JO-wEg">
+                                <rect key="frame" x="144.5" y="314" width="86" height="39"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Translate"/>
+                                <connections>
+                                    <action selector="translateButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2d2-Gh-CvM"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Input" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9VZ-fa-URV">
+                                <rect key="frame" x="40" y="393" width="295" height="234"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Output" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Br1-dc-P5e">
+                                <rect key="frame" x="40" y="60" width="295" height="224"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="SAb-JO-wEg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0FI-gz-cgs"/>
+                            <constraint firstItem="Br1-dc-P5e" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="B5n-Lh-LU7"/>
+                            <constraint firstItem="Br1-dc-P5e" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="BZc-4m-uFz"/>
+                            <constraint firstItem="9VZ-fa-URV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="Cta-Lg-7XG"/>
+                            <constraint firstItem="SAb-JO-wEg" firstAttribute="top" secondItem="Br1-dc-P5e" secondAttribute="bottom" constant="30" id="GQy-uG-TjO"/>
+                            <constraint firstItem="9VZ-fa-URV" firstAttribute="top" secondItem="SAb-JO-wEg" secondAttribute="bottom" constant="40" id="Lio-jS-Fic"/>
+                            <constraint firstItem="SAb-JO-wEg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="a2r-Mc-gBm"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Br1-dc-P5e" secondAttribute="trailing" constant="40" id="cOa-LH-wvR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9VZ-fa-URV" secondAttribute="trailing" constant="40" id="dD8-nt-3LX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9VZ-fa-URV" secondAttribute="bottom" constant="40" id="kYA-kB-moh"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="inputTextView" destination="9VZ-fa-URV" id="Kpt-oH-a86"/>
+                        <outlet property="outputTextView" destination="Br1-dc-P5e" id="V1i-9l-bjX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="140" y="132.68365817091455"/>
         </scene>
     </scenes>
 </document>

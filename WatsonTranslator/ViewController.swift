@@ -10,11 +10,21 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    @IBOutlet weak var inputTextView: UITextView!
+    @IBOutlet weak var outputTextView: UITextView!
+
+    @IBAction func translateButtonTapped(_ sender: UIButton) {
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // It would be easiest for the recipient to view the translation on the phone upside-down
+        flipViewUpsideDown(outputTextView)
+    }
 
+    func flipViewUpsideDown(_ view: UIView) {
+        UIView.animate(withDuration: 0.0) {
+            view.transform = CGAffineTransform(rotationAngle: .pi)
+        }
+    }
 }
-
