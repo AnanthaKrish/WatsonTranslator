@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var outputTextView: UITextView!
 
     @IBAction func translateButtonTapped(_ sender: UIButton) {
+        
     }
 
     override func viewDidLoad() {

@@ -14,6 +14,7 @@
 		92261E6721EA9A4C00A1A620 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92261E6521EA9A4C00A1A620 /* LaunchScreen.storyboard */; };
 		92261E7221EA9A4C00A1A620 /* WatsonTranslatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261E7121EA9A4C00A1A620 /* WatsonTranslatorTests.swift */; };
 		92261E7D21EA9A4C00A1A620 /* WatsonTranslatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261E7C21EA9A4C00A1A620 /* WatsonTranslatorUITests.swift */; };
+		92261E8B21EEB8BC00A1A620 /* Translator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261E8A21EEB8BC00A1A620 /* Translator.swift */; };
 		B31A0668E45180A3F730FC22 /* Pods_WatsonTranslator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032CE86DCAFA58FE9F815175 /* Pods_WatsonTranslator.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		92261E7821EA9A4C00A1A620 /* WatsonTranslatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WatsonTranslatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92261E7C21EA9A4C00A1A620 /* WatsonTranslatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatsonTranslatorUITests.swift; sourceTree = "<group>"; };
 		92261E7E21EA9A4C00A1A620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92261E8A21EEB8BC00A1A620 /* Translator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translator.swift; sourceTree = "<group>"; };
 		B7DB395CA883F8B87089E838 /* Pods-WatsonTranslator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsonTranslator.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatsonTranslator/Pods-WatsonTranslator.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +116,7 @@
 			children = (
 				92261E5C21EA9A4C00A1A620 /* AppDelegate.swift */,
 				92261E5E21EA9A4C00A1A620 /* ViewController.swift */,
+				92261E8A21EEB8BC00A1A620 /* Translator.swift */,
 				92261E6021EA9A4C00A1A620 /* Main.storyboard */,
 				92261E6321EA9A4C00A1A620 /* Assets.xcassets */,
 				92261E6521EA9A4C00A1A620 /* LaunchScreen.storyboard */,
@@ -338,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92261E5F21EA9A4C00A1A620 /* ViewController.swift in Sources */,
+				92261E8B21EEB8BC00A1A620 /* Translator.swift in Sources */,
 				92261E5D21EA9A4C00A1A620 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
