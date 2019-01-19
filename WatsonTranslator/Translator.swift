@@ -19,6 +19,7 @@ struct Translator {
     init(inputLanguage: Language, outputLanguage: Language) {
         self.inputLanguage = inputLanguage
         // TODO: Need to verify that the output language is supported for the provided input language
+        // This should be done at the UI level (output language options determined by the chosen input language)
         self.outputLanguage = outputLanguage
 
         languageTransltor = LanguageTranslator(version: "2018-05-01", apiKey: Credentials.LanguageTranslatorAPIKey)
@@ -71,4 +72,59 @@ enum Language: String {
     case spanish = "es"
     case swedish = "sv"
     case turkish = "tr"
+
+    // Watson LanguageTranslator can only translate between certain languages
+    // https://console.bluemix.net/docs/services/language-translator/translation-models.html#translation-models
+    func canTranslateTo(_ other: Language) -> Bool {
+        // This could be simplified with a [Language: [Language]] dictionary,
+        // but a switch statement is more reliable to ensure every case is captured
+        switch self {
+        case .arabic:
+            return other == .english
+        case .catalan:
+            return other == .english
+        case .chinese_simplified:
+            return other == .english
+        case .chinese_traditional:
+            return other == .english
+        case .czech:
+            return other == .english
+        case.danish:
+            return other == .english
+        case .dutch:
+            return other == .english
+        case .english:
+            return other != .catalan && other != .hungarian
+        case .finnish:
+            return other == .english
+        case .french:
+            return other == .german || other == .english || other == .spanish
+        case .german:
+            return other == .english || other == .french || other == .italian
+        case .hindi:
+            return other == .english
+        case .hungarian:
+            return other == .english
+        case .italian:
+            return other == .german || other == .english
+        case .japanese:
+            return other == .english
+        case .korean:
+            return other == .english
+        case .norwegian_bokmål:
+            return other == .english
+        case .polish:
+            return other == .english
+        case .portuguese:
+            return other == .english
+        case .russian:
+            return other == .english
+        case .spanish:
+            return other == .catalan || other == .english || other == .french
+        case .swedish:
+            return other == .english
+        case .turkish:
+            return other == .english
+        }
+    }
 }
