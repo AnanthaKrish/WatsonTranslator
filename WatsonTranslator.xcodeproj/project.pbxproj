@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9209C4B321F3A84F00AF78B6 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9209C4B221F3A84F00AF78B6 /* Credentials.swift */; };
 		92261E5D21EA9A4C00A1A620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261E5C21EA9A4C00A1A620 /* AppDelegate.swift */; };
 		92261E5F21EA9A4C00A1A620 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261E5E21EA9A4C00A1A620 /* ViewController.swift */; };
 		92261E6221EA9A4C00A1A620 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92261E6021EA9A4C00A1A620 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		032CE86DCAFA58FE9F815175 /* Pods_WatsonTranslator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatsonTranslator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FA364166685A043F8799057 /* Pods-WatsonTranslator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsonTranslator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WatsonTranslator/Pods-WatsonTranslator.debug.xcconfig"; sourceTree = "<group>"; };
+		9209C4B221F3A84F00AF78B6 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		92261E5921EA9A4C00A1A620 /* WatsonTranslator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatsonTranslator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92261E5C21EA9A4C00A1A620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92261E5E21EA9A4C00A1A620 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +91,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9209C4B421F3A94600AF78B6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9209C4B221F3A84F00AF78B6 /* Credentials.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		92261E5021EA9A4C00A1A620 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +128,7 @@
 				92261E5E21EA9A4C00A1A620 /* ViewController.swift */,
 				92261E8A21EEB8BC00A1A620 /* Translator.swift */,
 				92261E6021EA9A4C00A1A620 /* Main.storyboard */,
+				9209C4B421F3A94600AF78B6 /* Resources */,
 				92261E6321EA9A4C00A1A620 /* Assets.xcassets */,
 				92261E6521EA9A4C00A1A620 /* LaunchScreen.storyboard */,
 				92261E6821EA9A4C00A1A620 /* Info.plist */,
@@ -342,6 +353,7 @@
 			files = (
 				92261E5F21EA9A4C00A1A620 /* ViewController.swift in Sources */,
 				92261E8B21EEB8BC00A1A620 /* Translator.swift in Sources */,
+				9209C4B321F3A84F00AF78B6 /* Credentials.swift in Sources */,
 				92261E5D21EA9A4C00A1A620 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

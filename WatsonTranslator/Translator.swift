@@ -21,8 +21,8 @@ struct Translator {
         // TODO: Need to verify that the output language is supported for the provided input language
         self.outputLanguage = outputLanguage
 
-        languageTransltor = LanguageTranslator(version: "2018-05-01", apiKey: "")
-        languageTransltor.serviceURL = ""
+        languageTransltor = LanguageTranslator(version: "2018-05-01", apiKey: Credentials.LanguageTranslatorAPIKey)
+        languageTransltor.serviceURL = Credentials.LanguageTranslatorURL
     }
 
     func translate(_ text: String) {
