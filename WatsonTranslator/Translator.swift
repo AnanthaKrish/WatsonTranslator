@@ -48,7 +48,7 @@ struct Translator {
     }
 }
 
-enum Language: String {
+enum Language: String, CaseIterable {
     case arabic = "ar"
     case catalan = "ca"
     case chinese_simplified = "zh"
@@ -72,6 +72,34 @@ enum Language: String {
     case spanish = "es"
     case swedish = "sv"
     case turkish = "tr"
+
+    var displayName: String {
+        switch self {
+        case .arabic: return "Arabic"
+        case .catalan: return "Catalan"
+        case .chinese_simplified: return "Chinese simplified"
+        case .chinese_traditional: return "Chinese traditional"
+        case .czech: return "Czech"
+        case.danish: return "Danish"
+        case .dutch: return "Dutch"
+        case .english: return "English"
+        case .finnish: return "Finnish"
+        case .french: return "French"
+        case .german: return "German"
+        case .hindi: return "Hindi"
+        case .hungarian: return "Hungarian"
+        case .italian: return "Italian"
+        case .japanese: return "Japanese"
+        case .korean: return "Korean"
+        case .norwegian_bokmål: return "Norwegian"
+        case .polish: return "Polish"
+        case .portuguese: return "Portuguese"
+        case .russian: return "Russian"
+        case .spanish: return "Spanish"
+        case .swedish: return "Swedish"
+        case .turkish: return "Turkish"
+        }
+    }
 
     // Watson LanguageTranslator can only translate between certain languages
     // https://console.bluemix.net/docs/services/language-translator/translation-models.html#translation-models
