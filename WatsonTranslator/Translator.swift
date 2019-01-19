@@ -25,8 +25,14 @@ struct Translator {
         languageTransltor.serviceURL = Credentials.LanguageTranslatorURL
     }
 
-    func translate(_ text: String) {
-        languageTransltor.translate(text: [text], modelID: nil, source: inputLanguage.rawValue, target: outputLanguage.rawValue) { response, error in
+    func translate(_ text: String, completionHandler: @escaping (String) -> Void) {
+        languageTransltor.translate(
+            text: [text],
+            modelID: nil,
+            source: inputLanguage.rawValue,
+            target: outputLanguage.rawValue)
+        {
+            response, error in
 
             if let error = error {
                 print(error)
@@ -36,8 +42,7 @@ struct Translator {
                 print("Failed to get result")
                 return
             }
-            // TODO: Display output in the view
-            print(result.translations.map{ $0.translationOutput })
+            completionHandler(result.translations[0].translationOutput)
         }
     }
 }
