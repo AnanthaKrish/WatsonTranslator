@@ -19,14 +19,19 @@ class ViewController: UIViewController {
         guard
             let inputLanguage = inputLanguagePickerController.selectedLanguage,
             let outputLanguage = outputLanguagePickerController.selectedLanguage else {
-                print("Failed to get selected languages")
+                self.inputTextView.text = "Error: Invalid language selections"
                 return
         }
 
         let translator = Translator(inputLanguage: inputLanguage, outputLanguage: outputLanguage)
-        translator.translate(inputTextView.text) { translation in
+        translator.translate(inputTextView.text) { translation, error in
             DispatchQueue.main.async {
-                self.outputTextView.text = translation
+                if let translation = translation {
+                    self.outputTextView.text = translation
+                }
+                else if let error = error {
+                    self.inputTextView.text = "Error: \(error)"
+                }
             }
         }
     }
