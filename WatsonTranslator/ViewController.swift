@@ -16,28 +16,31 @@ class ViewController: UIViewController {
     @IBOutlet weak var outputLanguagePicker: UIPickerView!
 
     @IBAction func translateButtonTapped(_ sender: UIButton) {
-        translator?.translate(inputTextView.text) { translation in
+        guard
+            let inputLanguage = inputLanguagePickerController.selectedLanguage,
+            let outputLanguage = outputLanguagePickerController.selectedLanguage else {
+                print("Failed to get selected languages")
+                return
+        }
+
+        let translator = Translator(inputLanguage: inputLanguage, outputLanguage: outputLanguage)
+        translator.translate(inputTextView.text) { translation in
             DispatchQueue.main.async {
                 self.outputTextView.text = translation
             }
         }
     }
 
-    var translator: Translator?
-    let languagePickerController = LanguagePickerController()
+
+    let inputLanguagePickerController = LanguagePickerController()
+    let outputLanguagePickerController = LanguagePickerController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        translator = Translator(inputLanguage: .english, outputLanguage: .spanish)
-
         // It would be easiest for the recipient to view the translation on the device upside-down
         flipViewUpsideDown(outputTextView)
-
-        inputLanguagePicker.dataSource = languagePickerController
-        inputLanguagePicker.delegate = languagePickerController
-        outputLanguagePicker.dataSource = languagePickerController
-        outputLanguagePicker.delegate = languagePickerController
+        configureLanguagePickers()
     }
 
     func flipViewUpsideDown(_ view: UIView) {
@@ -45,28 +48,21 @@ class ViewController: UIViewController {
             view.transform = CGAffineTransform(rotationAngle: .pi)
         }
     }
-}
 
+    // Set the pickers' delegates and data sources, and set default selected values
+    func configureLanguagePickers() {
+        inputLanguagePicker.dataSource = inputLanguagePickerController
+        inputLanguagePicker.delegate = inputLanguagePickerController
+        outputLanguagePicker.dataSource = outputLanguagePickerController
+        outputLanguagePicker.delegate = outputLanguagePickerController
 
-
-class LanguagePickerController: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
-
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return Language.allCases.count
-    }
-
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        var pickerLabel: UILabel? = (view as? UILabel)
-        if pickerLabel == nil {
-            pickerLabel = UILabel()
-            pickerLabel?.font = pickerLabel?.font.withSize(16)
-            pickerLabel?.textAlignment = .center
-        }
-        pickerLabel?.text = Language.allCases[row].displayName
-        return pickerLabel!
+        // Default the input to English for easier testing
+        let rowForEnglish = Language.allCases.firstIndex(of: .english)!
+        inputLanguagePicker.selectRow(rowForEnglish, inComponent: 0, animated: false)
+        inputLanguagePickerController.pickerView(inputLanguagePicker, didSelectRow: rowForEnglish, inComponent: 0)
+        // Default the output to Spanish for easier testing
+        let rowForSpanish = Language.allCases.firstIndex(of: .spanish)!
+        outputLanguagePicker.selectRow(rowForSpanish, inComponent: 0, animated: false)
+        outputLanguagePickerController.pickerView(outputLanguagePicker, didSelectRow: rowForSpanish, inComponent: 0)
     }
 }
