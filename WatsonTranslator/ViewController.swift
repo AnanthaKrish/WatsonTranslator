@@ -59,7 +59,14 @@ class LanguagePickerController: NSObject, UIPickerViewDataSource, UIPickerViewDe
         return Language.allCases.count
     }
 
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return Language.allCases[row].displayName
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var pickerLabel: UILabel? = (view as? UILabel)
+        if pickerLabel == nil {
+            pickerLabel = UILabel()
+            pickerLabel?.font = pickerLabel?.font.withSize(16)
+            pickerLabel?.textAlignment = .center
+        }
+        pickerLabel?.text = Language.allCases[row].displayName
+        return pickerLabel!
     }
 }
