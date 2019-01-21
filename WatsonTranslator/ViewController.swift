@@ -45,14 +45,23 @@ class ViewController: UIViewController {
 
         AVAudioSession.sharedInstance().requestRecordPermission { _ in }
 
-        // It would be easiest for the recipient to view the translation on the device upside-down
-        flipViewUpsideDown(outputTextView)
+        configureTextViews()
         configureLanguagePickers()
     }
 
-    func flipViewUpsideDown(_ view: UIView) {
+    func configureTextViews() {
+        inputTextView.layer.borderWidth = 2.0
+        outputTextView.layer.borderWidth = 2.0
+
+        inputTextView.layer.cornerRadius = 10.0
+        outputTextView.layer.cornerRadius = 10.0
+
+        inputTextView.layer.borderColor = UIColor(white: 0.8, alpha: 1.0).cgColor
+        outputTextView.layer.borderColor = UIColor(white: 0.8, alpha: 1.0).cgColor
+
+        // It would be easiest for the recipient to view the translation on the device upside-down
         UIView.animate(withDuration: 0.0) {
-            view.transform = CGAffineTransform(rotationAngle: .pi)
+            self.outputTextView.transform = CGAffineTransform(rotationAngle: .pi)
         }
     }
 
