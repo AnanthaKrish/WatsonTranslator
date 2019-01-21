@@ -23,7 +23,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Translate"/>
                                 <connections>
-                                    <action selector="translateButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2d2-Gh-CvM"/>
+                                    <action selector="translateButtonHeld:" destination="BYZ-38-t0r" eventType="touchDown" id="VYg-LL-dI6"/>
+                                    <action selector="translateButtonLifted:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2d2-Gh-CvM"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Input" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9VZ-fa-URV">

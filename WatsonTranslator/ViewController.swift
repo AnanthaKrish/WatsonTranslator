@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
 
@@ -15,33 +16,34 @@ class ViewController: UIViewController {
     @IBOutlet weak var inputLanguagePicker: UIPickerView!
     @IBOutlet weak var outputLanguagePicker: UIPickerView!
 
-    @IBAction func translateButtonTapped(_ sender: UIButton) {
-        guard
-            let inputLanguage = inputLanguagePickerController.selectedLanguage,
-            let outputLanguage = outputLanguagePickerController.selectedLanguage else {
-                self.inputTextView.text = "Error: Invalid language selections"
-                return
-        }
-
-        let translator = Translator(inputLanguage: inputLanguage, outputLanguage: outputLanguage)
-        translator.translate(inputTextView.text) { translation, error in
+    @IBAction func translateButtonHeld(_ sender: UIButton) {
+        speechRecorder.startRecordingAudio() { [weak self] transcription, error in
             DispatchQueue.main.async {
-                if let translation = translation {
-                    self.outputTextView.text = translation
+                if let transcription = transcription {
+                    self?.inputTextView.text = transcription
                 }
                 else if let error = error {
-                    self.inputTextView.text = "Error: \(error)"
+                    self?.inputTextView.text = "Error: \(error)"
                 }
+                self?.translate()
             }
         }
     }
 
+    @IBAction func translateButtonLifted(_ sender: UIButton) {
+        speechRecorder.stopRecordingAudio()
+    }
 
+
+    let speechRecorder = SpeechRecorder()
     let inputLanguagePickerController = LanguagePickerController()
     let outputLanguagePickerController = LanguagePickerController()
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        AVAudioSession.sharedInstance().requestRecordPermission { _ in }
 
         // It would be easiest for the recipient to view the translation on the device upside-down
         flipViewUpsideDown(outputTextView)
@@ -69,5 +71,26 @@ class ViewController: UIViewController {
         let rowForSpanish = Language.allCases.firstIndex(of: .spanish)!
         outputLanguagePicker.selectRow(rowForSpanish, inComponent: 0, animated: false)
         outputLanguagePickerController.pickerView(outputLanguagePicker, didSelectRow: rowForSpanish, inComponent: 0)
+    }
+
+    func translate() {
+        guard
+            let inputLanguage = self.inputLanguagePickerController.selectedLanguage,
+            let outputLanguage = self.outputLanguagePickerController.selectedLanguage else {
+                self.inputTextView.text = "Error: Invalid language selections"
+                return
+        }
+
+        let translator = Translator(inputLanguage: inputLanguage, outputLanguage: outputLanguage)
+        translator.translate(self.inputTextView.text) { [weak self] translation, error in
+            DispatchQueue.main.async {
+                if let translation = translation {
+                    self?.outputTextView.text = translation
+                }
+                else if let error = error {
+                    self?.inputTextView.text = "Error: \(error)"
+                }
+            }
+        }
     }
 }
