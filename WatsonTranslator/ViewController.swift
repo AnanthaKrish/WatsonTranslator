@@ -21,11 +21,11 @@ class ViewController: UIViewController {
             DispatchQueue.main.async {
                 if let transcription = transcription {
                     self?.inputTextView.text = transcription
+                    self?.translate()
                 }
                 else if let error = error {
-                    self?.inputTextView.text = "Error: \(error)"
+                    self?.showError(message: error)
                 }
-                self?.translate()
             }
         }
     }
@@ -77,7 +77,7 @@ class ViewController: UIViewController {
         guard
             let inputLanguage = self.inputLanguagePickerController.selectedLanguage,
             let outputLanguage = self.outputLanguagePickerController.selectedLanguage else {
-                self.inputTextView.text = "Error: Invalid language selections"
+                self.showError(message: "Invalid language selections")
                 return
         }
 
@@ -88,9 +88,15 @@ class ViewController: UIViewController {
                     self?.outputTextView.text = translation
                 }
                 else if let error = error {
-                    self?.inputTextView.text = "Error: \(error)"
+                    self?.showError(message: error)
                 }
             }
         }
+    }
+
+    func showError(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
