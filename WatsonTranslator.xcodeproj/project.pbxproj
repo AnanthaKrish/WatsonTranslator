@@ -18,6 +18,8 @@
 		92261E7221EA9A4C00A1A620 /* WatsonTranslatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261E7121EA9A4C00A1A620 /* WatsonTranslatorTests.swift */; };
 		92261E7D21EA9A4C00A1A620 /* WatsonTranslatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261E7C21EA9A4C00A1A620 /* WatsonTranslatorUITests.swift */; };
 		92261E8B21EEB8BC00A1A620 /* Translator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261E8A21EEB8BC00A1A620 /* Translator.swift */; };
+		92EFE5F521FA1235003DD89E /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EFE5F421FA1235003DD89E /* Speaker.swift */; };
+		92FB960521FD29C600FEAD21 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FB960321FD29A400FEAD21 /* AVFoundation.framework */; };
 		B31A0668E45180A3F730FC22 /* Pods_WatsonTranslator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032CE86DCAFA58FE9F815175 /* Pods_WatsonTranslator.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +60,8 @@
 		92261E7C21EA9A4C00A1A620 /* WatsonTranslatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatsonTranslatorUITests.swift; sourceTree = "<group>"; };
 		92261E7E21EA9A4C00A1A620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92261E8A21EEB8BC00A1A620 /* Translator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translator.swift; sourceTree = "<group>"; };
+		92EFE5F421FA1235003DD89E /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
+		92FB960321FD29A400FEAD21 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B7DB395CA883F8B87089E838 /* Pods-WatsonTranslator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsonTranslator.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatsonTranslator/Pods-WatsonTranslator.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92FB960521FD29C600FEAD21 /* AVFoundation.framework in Frameworks */,
 				B31A0668E45180A3F730FC22 /* Pods_WatsonTranslator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,6 +95,7 @@
 		5D7527DBCA4B1D918D9B07AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				92FB960321FD29A400FEAD21 /* AVFoundation.framework */,
 				032CE86DCAFA58FE9F815175 /* Pods_WatsonTranslator.framework */,
 			);
 			name = Frameworks;
@@ -135,6 +141,7 @@
 				9209C4B921F50BE600AF78B6 /* LanguagePickerController.swift */,
 				92261E8A21EEB8BC00A1A620 /* Translator.swift */,
 				9209C4BB21F5268B00AF78B6 /* SpeechRecorder.swift */,
+				92EFE5F421FA1235003DD89E /* Speaker.swift */,
 				92261E6021EA9A4C00A1A620 /* Main.storyboard */,
 				92261E6521EA9A4C00A1A620 /* LaunchScreen.storyboard */,
 				9209C4B421F3A94600AF78B6 /* Resources */,
@@ -362,6 +369,7 @@
 				92261E8B21EEB8BC00A1A620 /* Translator.swift in Sources */,
 				9209C4BC21F5268B00AF78B6 /* SpeechRecorder.swift in Sources */,
 				9209C4B321F3A84F00AF78B6 /* Credentials.swift in Sources */,
+				92EFE5F521FA1235003DD89E /* Speaker.swift in Sources */,
 				92261E5D21EA9A4C00A1A620 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

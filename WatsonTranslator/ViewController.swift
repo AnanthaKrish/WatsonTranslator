@@ -36,6 +36,7 @@ class ViewController: UIViewController {
 
 
     let speechRecorder = SpeechRecorder()
+    let speaker = Speaker()
     let inputLanguagePickerController = LanguagePickerController()
     let outputLanguagePickerController = LanguagePickerController()
 
@@ -82,6 +83,8 @@ class ViewController: UIViewController {
         outputLanguagePickerController.pickerView(outputLanguagePicker, didSelectRow: rowForSpanish, inComponent: 0)
     }
 
+    // Translates the input text and displays it in the output text
+    // Once the translation is completed, it is read aloud
     func translate() {
         guard
             let inputLanguage = self.inputLanguagePickerController.selectedLanguage,
@@ -95,6 +98,7 @@ class ViewController: UIViewController {
             DispatchQueue.main.async {
                 if let translation = translation {
                     self?.outputTextView.text = translation
+                    self?.speaker.readAloud(text: translation)
                 }
                 else if let error = error {
                     self?.showError(message: error)
