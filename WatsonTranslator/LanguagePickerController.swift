@@ -12,14 +12,26 @@ import UIKit
 
 class LanguagePickerController: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
 
+    weak var picker: UIPickerView?
     var selectedLanguage: Language?
+    var supportedLanguages: [Language] = [] {
+        didSet {
+            picker?.reloadAllComponents()
+            if supportedLanguages.count > 0 {
+                DispatchQueue.main.async {
+                    let defaultLanguageRow = self.supportedLanguages.firstIndex(of: .english) ?? self.supportedLanguages.count / 2
+                    self.picker?.selectRow(defaultLanguageRow, inComponent: 0, animated: false)
+                }
+            }
+        }
+    }
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return Language.allCases.count
+        return supportedLanguages.count
     }
 
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -29,11 +41,13 @@ class LanguagePickerController: NSObject, UIPickerViewDataSource, UIPickerViewDe
             pickerLabel?.font = pickerLabel?.font.withSize(16)
             pickerLabel?.textAlignment = .center
         }
-        pickerLabel?.text = Language.allCases[row].displayName
+        pickerLabel?.text = supportedLanguages[row].displayName
         return pickerLabel!
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedLanguage = Language.allCases[row]
+        selectedLanguage = supportedLanguages[row]
+    }
+}
     }
 }

@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var outputLanguagePicker: UIPickerView!
 
     @IBAction func translateButtonHeld(_ sender: UIButton) {
-        speechRecorder.startRecordingAudio() { [weak self] transcription, error in
+        speechRecorder.startRecordingAudio(language: inputLanguagePickerController.selectedLanguage) { [weak self] transcription, error in
             DispatchQueue.main.async {
                 if let transcription = transcription {
                     self?.inputTextView.text = transcription
@@ -34,15 +34,17 @@ class ViewController: UIViewController {
         speechRecorder.stopRecordingAudio()
     }
 
-
-    let speechRecorder = SpeechRecorder()
-    let speaker = Speaker()
     let inputLanguagePickerController = LanguagePickerController()
     let outputLanguagePickerController = LanguagePickerController()
 
+    let speechRecorder = SpeechRecorder()
+    let translator = Translator()
+    let speaker = Speaker()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        speechRecorder.inputLanguagePickerController = inputLanguagePickerController
 
         AVAudioSession.sharedInstance().requestRecordPermission { _ in }
 
@@ -69,18 +71,15 @@ class ViewController: UIViewController {
     // Set the pickers' delegates and data sources, and set default selected values
     func configureLanguagePickers() {
         inputLanguagePicker.dataSource = inputLanguagePickerController
-        inputLanguagePicker.delegate = inputLanguagePickerController
         outputLanguagePicker.dataSource = outputLanguagePickerController
+
+        inputLanguagePicker.delegate = inputLanguagePickerController
         outputLanguagePicker.delegate = outputLanguagePickerController
 
-        // Default the input to English for easier testing
-        let rowForEnglish = Language.allCases.firstIndex(of: .english)!
-        inputLanguagePicker.selectRow(rowForEnglish, inComponent: 0, animated: false)
-        inputLanguagePickerController.pickerView(inputLanguagePicker, didSelectRow: rowForEnglish, inComponent: 0)
-        // Default the output to Spanish for easier testing
-        let rowForSpanish = Language.allCases.firstIndex(of: .spanish)!
-        outputLanguagePicker.selectRow(rowForSpanish, inComponent: 0, animated: false)
-        outputLanguagePickerController.pickerView(outputLanguagePicker, didSelectRow: rowForSpanish, inComponent: 0)
+        // Yes, this is 2-way ownership
+        // The controllers have a weak reference to its picker to avoid retain cycles
+        inputLanguagePickerController.picker = inputLanguagePicker
+        outputLanguagePickerController.picker = outputLanguagePicker
     }
 
     // Translates the input text and displays it in the output text

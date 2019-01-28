@@ -13,19 +13,28 @@ import SpeechToText
 class SpeechRecorder {
 
     let speechToText: SpeechToText
+    var inputLanguagePickerController: LanguagePickerController? {
+        didSet {
+            loadSupportedInputLanguages()
+        }
+    }
+    var supportedInputLanguages: [SpeechModel] = []
 
     init() {
         speechToText = SpeechToText(apiKey: Credentials.SpeechToTextAPIKey)
     }
 
-    func startRecordingAudio(completionHandler: @escaping (_ transcription: String?, _ error: String?) -> Void) {
+    func startRecordingAudio(language: Language?, completionHandler: @escaping (_ transcription: String?, _ error: String?) -> Void) {
         var settings = RecognitionSettings(contentType: "audio/wav")
         settings.interimResults = false
         settings.filterProfanity = false
 
+        // This may be nil. If so, SpeechToText will default to "en-US_BroadbandModel".
+        let model = getModel(for: language)
+
         speechToText.recognizeMicrophone(
             settings: settings,
-            model: "en-US_BroadbandModel")
+            model: model?.name)
         {
             response, error in
 
@@ -60,5 +69,57 @@ class SpeechRecorder {
 
     func stopRecordingAudio() {
         speechToText.stopRecognizeMicrophone()
+    }
+
+    func loadSupportedInputLanguages() {
+        // Don't need to make an unnecessary network call if supportedInputLanguages is already loaded
+        guard supportedInputLanguages.count == 0 else { return }
+
+        speechToText.listModels() {
+            response, error in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+
+            guard let models = response?.result?.models else {
+                print("unknown error when synthesizing speech")
+                return
+            }
+
+            // Only want one model per language
+            // Some languages have multiple models for multiple geographical regions
+            models.forEach({ model in
+                if !self.supportedInputLanguages.contains { $0.languageID == model.languageID } {
+                    self.supportedInputLanguages.append(model)
+                }
+            })
+            self.inputLanguagePickerController?.supportedLanguages = self.supportedInputLanguages.map{ $0.languageModel }
+        }
+    }
+
+    func getModel(for language: Language?) -> SpeechModel? {
+        guard let language = language else { return nil }
+        return supportedInputLanguages.first { model -> Bool in
+            return model.languageID == language.rawValue
+        }
+    }
+}
+
+
+extension SpeechModel {
+    // Used to match a SpeechModel object to the Language type
+    var languageID: String {
+        return String(self.language.prefix(2))
+    }
+
+    // Convert to custom Language type
+    // Defaults to English, but this should never happen
+    // unless the SpeechToText service gets a new language that's not yet in the Language type
+    var languageModel: Language {
+        return Language.allCases.first(where: { language -> Bool in
+            language.rawValue == self.languageID
+        }) ?? .english
     }
 }
