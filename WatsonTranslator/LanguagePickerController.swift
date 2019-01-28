@@ -16,11 +16,13 @@ class LanguagePickerController: NSObject, UIPickerViewDataSource, UIPickerViewDe
     var selectedLanguage: Language?
     var supportedLanguages: [Language] = [] {
         didSet {
-            picker?.reloadAllComponents()
+            guard let picker = picker else { return }
+            picker.reloadAllComponents()
             if supportedLanguages.count > 0 {
                 DispatchQueue.main.async {
                     let defaultLanguageRow = self.supportedLanguages.firstIndex(of: .english) ?? self.supportedLanguages.count / 2
-                    self.picker?.selectRow(defaultLanguageRow, inComponent: 0, animated: false)
+                    picker.selectRow(defaultLanguageRow, inComponent: 0, animated: false)
+                    self.pickerView(picker, didSelectRow: defaultLanguageRow, inComponent: 0)
                 }
             }
         }
@@ -49,5 +51,26 @@ class LanguagePickerController: NSObject, UIPickerViewDataSource, UIPickerViewDe
         selectedLanguage = supportedLanguages[row]
     }
 }
+
+
+class InputLanguagePickerController: LanguagePickerController {
+
+    weak var outputLanguagePickerController: LanguagePickerController?
+    weak var translator: Translator?
+    weak var speechRecorder: SpeechRecorder? {
+        didSet {
+            if let speechRecorder = speechRecorder {
+                supportedLanguages = speechRecorder.supportedInputLanguages.map{ $0.languageModel }
+            }
+        }
+    }
+
+    override func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        super.pickerView(pickerView, didSelectRow: row, inComponent: component)
+        if let selectedLanguage = selectedLanguage,
+            let supportedTranslations = translator?.getSupportedTranslations(for: selectedLanguage)
+        {
+            outputLanguagePickerController?.supportedLanguages = supportedTranslations
+        }
     }
 }

@@ -10,24 +10,21 @@ import Foundation
 import LanguageTranslator
 
 
-struct Translator {
+class Translator {
 
-    var inputLanguage: Language
-    var outputLanguage: Language
     let languageTransltor: LanguageTranslator
+    var supportedTranslations: [TranslationModel]?
+    var translationsLoaded: Bool = false
 
-    init(inputLanguage: Language, outputLanguage: Language) {
-        self.inputLanguage = inputLanguage
-        // TODO: Need to verify that the output language is supported for the provided input language
-        // This should be done at the UI level (output language options determined by the chosen input language)
-        self.outputLanguage = outputLanguage
-
+    init() {
         languageTransltor = LanguageTranslator(version: "2018-05-01", apiKey: Credentials.LanguageTranslatorAPIKey)
         languageTransltor.serviceURL = Credentials.LanguageTranslatorURL
+        
+        loadSupportedTranslations()
     }
 
     // Translate the provided text with the inputLanguage and outputLanguage specified for this Translator instance
-    func translate(_ text: String, completionHandler: @escaping (_ translation: String?, _ error: String?) -> Void) {
+    func translate(_ text: String, inputLanguage: Language, outputLanguage: Language, completionHandler: @escaping (_ translation: String?, _ error: String?) -> Void) {
         languageTransltor.translate(
             text: [text],
             modelID: nil,
@@ -47,6 +44,49 @@ struct Translator {
             }
             completionHandler(result.translations[0].translationOutput, nil)
         }
+    }
+
+    func loadSupportedTranslations() {
+        // Don't need to make an unnecessary network call if supportedInputLanguages is already loaded
+        guard supportedTranslations == nil else { return }
+
+        languageTransltor.listModels() {
+            response, error in
+
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+
+            guard let models = response?.result?.models else {
+                print("Failed to get the translation models")
+                return
+            }
+
+            self.supportedTranslations = models
+            self.translationsLoaded = true
+        }
+    }
+
+    func getSupportedTranslations(for language: Language) -> [Language] {
+        let asdf = supportedTranslations?
+            .filter{ $0.source == language.rawValue }
+            .map{ $0.targetLanguageModel }
+            ?? []
+
+        return asdf
+    }
+}
+
+extension TranslationModel {
+
+    // Convert to custom Language type
+    // Defaults to English, but this should never happen
+    // unless the LanguageTranslator service gets a new language that's not yet in the Language type
+    var targetLanguageModel: Language {
+        return Language.allCases.first(where: { language -> Bool in
+            language.rawValue == self.target
+        }) ?? .english
     }
 }
 
@@ -100,61 +140,6 @@ enum Language: String, CaseIterable {
         case .spanish: return "Spanish"
         case .swedish: return "Swedish"
         case .turkish: return "Turkish"
-        }
-    }
-
-    // Watson LanguageTranslator can only translate between certain languages
-    // https://console.bluemix.net/docs/services/language-translator/translation-models.html#translation-models
-    func canTranslateTo(_ other: Language) -> Bool {
-        // This could be simplified with a [Language: [Language]] dictionary,
-        // but a switch statement is more reliable to ensure every case is captured
-        switch self {
-        case .arabic:
-            return other == .english
-        case .catalan:
-            return other == .english
-        case .chinese_simplified:
-            return other == .english
-        case .chinese_traditional:
-            return other == .english
-        case .czech:
-            return other == .english
-        case.danish:
-            return other == .english
-        case .dutch:
-            return other == .english
-        case .english:
-            return other != .catalan && other != .hungarian
-        case .finnish:
-            return other == .english
-        case .french:
-            return other == .german || other == .english || other == .spanish
-        case .german:
-            return other == .english || other == .french || other == .italian
-        case .hindi:
-            return other == .english
-        case .hungarian:
-            return other == .english
-        case .italian:
-            return other == .german || other == .english
-        case .japanese:
-            return other == .english
-        case .korean:
-            return other == .english
-        case .norwegian_bokmål:
-            return other == .english
-        case .polish:
-            return other == .english
-        case .portuguese:
-            return other == .english
-        case .russian:
-            return other == .english
-        case .spanish:
-            return other == .catalan || other == .english || other == .french
-        case .swedish:
-            return other == .english
-        case .turkish:
-            return other == .english
         }
     }
 }

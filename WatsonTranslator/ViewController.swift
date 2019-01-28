@@ -34,9 +34,10 @@ class ViewController: UIViewController {
         speechRecorder.stopRecordingAudio()
     }
 
-    let inputLanguagePickerController = LanguagePickerController()
+    let inputLanguagePickerController = InputLanguagePickerController()
     let outputLanguagePickerController = LanguagePickerController()
 
+    // Immediately start loading supported input languages, translations, and output languages
     let speechRecorder = SpeechRecorder()
     let translator = Translator()
     let speaker = Speaker()
@@ -44,7 +45,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        speechRecorder.inputLanguagePickerController = inputLanguagePickerController
+        // Pause screen loading until supported input languages and translations are loaded
+        while (!translator.translationsLoaded || !speechRecorder.inputLanguagesLoaded) { }
 
         AVAudioSession.sharedInstance().requestRecordPermission { _ in }
 
@@ -80,6 +82,11 @@ class ViewController: UIViewController {
         // The controllers have a weak reference to its picker to avoid retain cycles
         inputLanguagePickerController.picker = inputLanguagePicker
         outputLanguagePickerController.picker = outputLanguagePicker
+
+        // This must be called AFTER inputLanguagePickerController.picker has been set
+        inputLanguagePickerController.translator = translator
+        inputLanguagePickerController.speechRecorder = speechRecorder
+        inputLanguagePickerController.outputLanguagePickerController = outputLanguagePickerController
     }
 
     // Translates the input text and displays it in the output text
@@ -92,12 +99,17 @@ class ViewController: UIViewController {
                 return
         }
 
-        let translator = Translator(inputLanguage: inputLanguage, outputLanguage: outputLanguage)
-        translator.translate(self.inputTextView.text) { [weak self] translation, error in
+        translator.translate(
+            self.inputTextView.text,
+            inputLanguage: inputLanguage,
+            outputLanguage: outputLanguage)
+        {
+            [weak self] translation, error in
+
             DispatchQueue.main.async {
                 if let translation = translation {
                     self?.outputTextView.text = translation
-                    self?.speaker.readAloud(text: translation)
+                    self?.speaker.readAloud(text: translation, language: outputLanguage)
                 }
                 else if let error = error {
                     self?.showError(message: error)

@@ -13,15 +13,13 @@ import SpeechToText
 class SpeechRecorder {
 
     let speechToText: SpeechToText
-    var inputLanguagePickerController: LanguagePickerController? {
-        didSet {
-            loadSupportedInputLanguages()
-        }
-    }
     var supportedInputLanguages: [SpeechModel] = []
+    var inputLanguagesLoaded: Bool = false
 
     init() {
         speechToText = SpeechToText(apiKey: Credentials.SpeechToTextAPIKey)
+        
+        loadSupportedInputLanguages()
     }
 
     func startRecordingAudio(language: Language?, completionHandler: @escaping (_ transcription: String?, _ error: String?) -> Void) {
@@ -95,7 +93,7 @@ class SpeechRecorder {
                     self.supportedInputLanguages.append(model)
                 }
             })
-            self.inputLanguagePickerController?.supportedLanguages = self.supportedInputLanguages.map{ $0.languageModel }
+            self.inputLanguagesLoaded = true
         }
     }
 
