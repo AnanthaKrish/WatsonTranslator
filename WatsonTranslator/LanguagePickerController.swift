@@ -57,10 +57,10 @@ class InputLanguagePickerController: LanguagePickerController {
 
     weak var outputLanguagePickerController: LanguagePickerController?
     weak var translator: Translator?
-    weak var speechRecorder: SpeechRecorder? {
+    weak var listener: Listener? {
         didSet {
-            if let speechRecorder = speechRecorder {
-                supportedLanguages = speechRecorder.supportedInputLanguages.map{ $0.languageModel }
+            if let listener = listener {
+                supportedLanguages = listener.supportedInputLanguages.map{ $0.languageModel }
             }
         }
     }

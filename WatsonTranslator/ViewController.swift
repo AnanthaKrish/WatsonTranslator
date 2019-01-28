@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var outputLanguagePicker: UIPickerView!
 
     @IBAction func translateButtonHeld(_ sender: UIButton) {
-        speechRecorder.startRecordingAudio(language: inputLanguagePickerController.selectedLanguage) { [weak self] transcription, error in
+        listener.startRecordingAudio(language: inputLanguagePickerController.selectedLanguage) { [weak self] transcription, error in
             DispatchQueue.main.async {
                 if let transcription = transcription {
                     self?.inputTextView.text = transcription
@@ -31,14 +31,14 @@ class ViewController: UIViewController {
     }
 
     @IBAction func translateButtonLifted(_ sender: UIButton) {
-        speechRecorder.stopRecordingAudio()
+        listener.stopRecordingAudio()
     }
 
     let inputLanguagePickerController = InputLanguagePickerController()
     let outputLanguagePickerController = LanguagePickerController()
 
     // Immediately start loading supported input languages, translations, and output languages
-    let speechRecorder = SpeechRecorder()
+    let listener = Listener()
     let translator = Translator()
     let speaker = Speaker()
 
@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         // Pause screen loading until supported input languages and translations are loaded
-        while (!translator.translationsLoaded || !speechRecorder.inputLanguagesLoaded) { }
+        while (!translator.translationsLoaded || !listener.inputLanguagesLoaded) { }
 
         AVAudioSession.sharedInstance().requestRecordPermission { _ in }
 
@@ -85,7 +85,7 @@ class ViewController: UIViewController {
 
         // This must be called AFTER inputLanguagePickerController.picker has been set
         inputLanguagePickerController.translator = translator
-        inputLanguagePickerController.speechRecorder = speechRecorder
+        inputLanguagePickerController.listener = listener
         inputLanguagePickerController.outputLanguagePickerController = outputLanguagePickerController
     }
 

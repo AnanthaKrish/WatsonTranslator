@@ -1,5 +1,5 @@
 //
-//  SpeechRecorder.swift
+//  Listener.swift
 //  WatsonTranslator
 //
 //  Created by Anthony Oliveri on 1/20/19.
@@ -10,7 +10,7 @@ import Foundation
 import SpeechToText
 
 
-class SpeechRecorder {
+class Listener {
 
     let speechToText: SpeechToText
     var supportedInputLanguages: [SpeechModel] = []
