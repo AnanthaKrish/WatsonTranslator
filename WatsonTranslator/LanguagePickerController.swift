@@ -16,6 +16,9 @@ class LanguagePickerController: NSObject, UIPickerViewDataSource, UIPickerViewDe
     var selectedLanguage: Language?
     var supportedLanguages: [Language] = [] {
         didSet {
+            supportedLanguages.sort { (current, next) -> Bool in
+                return current.displayName < next.displayName
+            }
             guard let picker = picker else { return }
             picker.reloadAllComponents()
             if supportedLanguages.count > 0 {
