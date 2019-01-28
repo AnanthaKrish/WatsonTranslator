@@ -18,10 +18,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAb-JO-wEg">
-                                <rect key="frame" x="140.5" y="315.5" width="94" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Translate"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAb-JO-wEg" userLabel="Translate Up Button">
+                                <rect key="frame" x="159" y="377.5" width="57" height="57"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="SAb-JO-wEg" secondAttribute="height" multiplier="1:1" id="E6b-au-fw0"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="arrowButton"/>
                                 <connections>
                                     <action selector="translateButtonHeld:" destination="BYZ-38-t0r" eventType="touchDown" id="VYg-LL-dI6"/>
                                     <action selector="translateButtonLifted:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2d2-Gh-CvM"/>
@@ -38,32 +40,32 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PaQ-rT-mQ3" userLabel="Input Language Picker View">
-                                <rect key="frame" x="16" y="243.5" width="124.5" height="180"/>
+                                <rect key="frame" x="16" y="243.5" width="133" height="180"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="180" id="67y-Hu-NJS"/>
                                 </constraints>
                             </pickerView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PJ3-MW-lDQ" userLabel="Output Language Picker View">
-                                <rect key="frame" x="234.5" y="243.5" width="124.5" height="180"/>
+                                <rect key="frame" x="226" y="243.5" width="133" height="180"/>
                             </pickerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="PJ3-MW-lDQ" firstAttribute="height" secondItem="PaQ-rT-mQ3" secondAttribute="height" id="3fc-ni-qhO"/>
                             <constraint firstItem="9VZ-fa-URV" firstAttribute="top" secondItem="PaQ-rT-mQ3" secondAttribute="bottom" constant="16" id="56m-Na-Hac"/>
-                            <constraint firstItem="SAb-JO-wEg" firstAttribute="centerY" secondItem="PaQ-rT-mQ3" secondAttribute="centerY" id="6Ee-yT-gzO"/>
+                            <constraint firstItem="9VZ-fa-URV" firstAttribute="top" secondItem="SAb-JO-wEg" secondAttribute="bottom" constant="5" id="6ly-6o-Cae"/>
                             <constraint firstItem="PJ3-MW-lDQ" firstAttribute="width" secondItem="PaQ-rT-mQ3" secondAttribute="width" id="7JU-iO-slU"/>
                             <constraint firstItem="9VZ-fa-URV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="BsX-yC-RDF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Br1-dc-P5e" secondAttribute="trailing" constant="16" id="C5v-Q3-ZvS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9VZ-fa-URV" secondAttribute="bottom" constant="30" id="CeG-6p-8fd"/>
-                            <constraint firstItem="SAb-JO-wEg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ETM-Ez-rpa"/>
                             <constraint firstItem="PJ3-MW-lDQ" firstAttribute="centerY" secondItem="PaQ-rT-mQ3" secondAttribute="centerY" id="Hkv-wI-xhn"/>
                             <constraint firstItem="Br1-dc-P5e" firstAttribute="trailing" secondItem="PJ3-MW-lDQ" secondAttribute="trailing" id="JZJ-xB-G9D"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9VZ-fa-URV" secondAttribute="trailing" constant="16" id="Pus-1h-u03"/>
                             <constraint firstItem="Br1-dc-P5e" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="Q0p-Rm-13A"/>
-                            <constraint firstItem="PJ3-MW-lDQ" firstAttribute="leading" secondItem="SAb-JO-wEg" secondAttribute="trailing" id="TQE-u3-NSX"/>
-                            <constraint firstItem="SAb-JO-wEg" firstAttribute="width" secondItem="PaQ-rT-mQ3" secondAttribute="width" multiplier="3:4" id="Tkc-8t-Q4T"/>
+                            <constraint firstItem="PJ3-MW-lDQ" firstAttribute="leading" secondItem="SAb-JO-wEg" secondAttribute="trailing" constant="10" id="TQE-u3-NSX"/>
+                            <constraint firstItem="SAb-JO-wEg" firstAttribute="width" secondItem="PaQ-rT-mQ3" secondAttribute="width" multiplier="3:7" id="Tkc-8t-Q4T"/>
                             <constraint firstItem="PaQ-rT-mQ3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="XZM-UY-ykt"/>
+                            <constraint firstItem="PaQ-rT-mQ3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="cws-jV-WJq"/>
                             <constraint firstItem="Br1-dc-P5e" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="hrI-xL-Eqa"/>
                             <constraint firstItem="SAb-JO-wEg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iYF-qS-kIO"/>
                             <constraint firstItem="PaQ-rT-mQ3" firstAttribute="top" secondItem="Br1-dc-P5e" secondAttribute="bottom" constant="16" id="tNa-QH-Ibd"/>
@@ -82,4 +84,7 @@
             <point key="canvasLocation" x="140" y="132.68365817091455"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="arrowButton" width="180" height="180"/>
+    </resources>
 </document>
