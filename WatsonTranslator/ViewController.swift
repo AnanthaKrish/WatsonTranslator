@@ -15,8 +15,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var outputTextView: UITextView!
     @IBOutlet weak var inputLanguagePicker: UIPickerView!
     @IBOutlet weak var outputLanguagePicker: UIPickerView!
+    @IBOutlet weak var fadedView: UIView! // Makes the entire view less visible
 
     @IBAction func translateButtonHeld(_ sender: UIButton) {
+        view.bringSubviewToFront(fadedView)
         listener.startRecordingAudio(language: inputLanguagePickerController.selectedLanguage) { [weak self] transcription, error in
             DispatchQueue.main.async {
                 if let transcription = transcription {
@@ -31,6 +33,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func translateButtonLifted(_ sender: UIButton) {
+        view.sendSubviewToBack(fadedView)
         listener.stopRecordingAudio()
     }
 

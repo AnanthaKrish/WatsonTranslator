@@ -18,6 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RDO-jt-gfz">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAb-JO-wEg" userLabel="Translate Up Button">
                                 <rect key="frame" x="159" y="377.5" width="57" height="57"/>
                                 <constraints>
@@ -58,6 +62,7 @@
                             <constraint firstItem="9VZ-fa-URV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="BsX-yC-RDF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Br1-dc-P5e" secondAttribute="trailing" constant="16" id="C5v-Q3-ZvS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9VZ-fa-URV" secondAttribute="bottom" constant="30" id="CeG-6p-8fd"/>
+                            <constraint firstItem="RDO-jt-gfz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Fbd-sK-ByF"/>
                             <constraint firstItem="PJ3-MW-lDQ" firstAttribute="centerY" secondItem="PaQ-rT-mQ3" secondAttribute="centerY" id="Hkv-wI-xhn"/>
                             <constraint firstItem="Br1-dc-P5e" firstAttribute="trailing" secondItem="PJ3-MW-lDQ" secondAttribute="trailing" id="JZJ-xB-G9D"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9VZ-fa-URV" secondAttribute="trailing" constant="16" id="Pus-1h-u03"/>
@@ -65,14 +70,18 @@
                             <constraint firstItem="PJ3-MW-lDQ" firstAttribute="leading" secondItem="SAb-JO-wEg" secondAttribute="trailing" constant="10" id="TQE-u3-NSX"/>
                             <constraint firstItem="SAb-JO-wEg" firstAttribute="width" secondItem="PaQ-rT-mQ3" secondAttribute="width" multiplier="3:7" id="Tkc-8t-Q4T"/>
                             <constraint firstItem="PaQ-rT-mQ3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="XZM-UY-ykt"/>
+                            <constraint firstItem="RDO-jt-gfz" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="ZA1-nd-a01"/>
+                            <constraint firstItem="RDO-jt-gfz" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="bUD-bx-dFU"/>
                             <constraint firstItem="PaQ-rT-mQ3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="cws-jV-WJq"/>
                             <constraint firstItem="Br1-dc-P5e" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="hrI-xL-Eqa"/>
                             <constraint firstItem="SAb-JO-wEg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iYF-qS-kIO"/>
+                            <constraint firstItem="RDO-jt-gfz" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lqE-k0-Oa4"/>
                             <constraint firstItem="PaQ-rT-mQ3" firstAttribute="top" secondItem="Br1-dc-P5e" secondAttribute="bottom" constant="16" id="tNa-QH-Ibd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="fadedView" destination="RDO-jt-gfz" id="dyf-h0-ZIb"/>
                         <outlet property="inputLanguagePicker" destination="PaQ-rT-mQ3" id="R31-RS-WUt"/>
                         <outlet property="inputTextView" destination="9VZ-fa-URV" id="Kpt-oH-a86"/>
                         <outlet property="outputLanguagePicker" destination="PJ3-MW-lDQ" id="dv3-AC-nMI"/>
