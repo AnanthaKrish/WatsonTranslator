@@ -15,21 +15,38 @@ class ViewController: UIViewController {
     @IBOutlet weak var outputTextView: UITextView!
     @IBOutlet weak var inputLanguagePicker: UIPickerView!
     @IBOutlet weak var outputLanguagePicker: UIPickerView!
+    @IBOutlet weak var translateDownButton: UIButton!
     @IBOutlet weak var fadedView: UIView! // Makes the entire view less visible
 
-    @IBAction func translateButtonHeld(_ sender: UIButton) {
-        view.bringSubviewToFront(fadedView)
-        listener.startRecordingAudio(language: inputLanguagePickerController.selectedLanguage) { [weak self] transcription, error in
-            DispatchQueue.main.async {
-                if let transcription = transcription {
-                    self?.inputTextView.text = transcription
-                    self?.translate()
-                }
-                else if let error = error {
-                    self?.showError(message: error)
-                }
-            }
+    // Translating from the input language to the output language
+    @IBAction func translateUpButtonHeld(_ sender: UIButton) {
+        guard
+            let inputLanguage = self.inputLanguagePickerController.selectedLanguage,
+            let outputLanguage = self.outputLanguagePickerController.selectedLanguage else {
+                self.showError(message: "Invalid language selections")
+                return
         }
+        transcribe(
+            inputLanguage: inputLanguage,
+            outputLanguage: outputLanguage,
+            inputTextView: inputTextView,
+            outputTextView: outputTextView
+        )
+    }
+    // Translating the opposite direction (output language to input language)
+    @IBAction func translateDownButtonHeld(_ sender: UIButton) {
+        guard
+            let inputLanguage = self.outputLanguagePickerController.selectedLanguage,
+            let outputLanguage = self.inputLanguagePickerController.selectedLanguage else {
+                self.showError(message: "Invalid language selections")
+                return
+        }
+        transcribe(
+            inputLanguage: inputLanguage,
+            outputLanguage: outputLanguage,
+            inputTextView: outputTextView,
+            outputTextView: inputTextView
+        )
     }
 
     @IBAction func translateButtonLifted(_ sender: UIButton) {
@@ -53,8 +70,15 @@ class ViewController: UIViewController {
 
         AVAudioSession.sharedInstance().requestRecordPermission { _ in }
 
+        configureTranslationButtons()
         configureTextViews()
         configureLanguagePickers()
+    }
+
+    func configureTranslationButtons() {
+        UIView.animate(withDuration: 0.0) {
+            self.translateDownButton.transform = CGAffineTransform(rotationAngle: .pi)
+        }
     }
 
     func configureTextViews() {
@@ -92,18 +116,36 @@ class ViewController: UIViewController {
         inputLanguagePickerController.outputLanguagePickerController = outputLanguagePickerController
     }
 
+    func transcribe(
+        inputLanguage: Language,
+        outputLanguage: Language,
+        inputTextView: UITextView,
+        outputTextView: UITextView)
+    {
+        view.bringSubviewToFront(fadedView)
+        listener.startRecordingAudio(language: inputLanguage) { [weak self] transcription, error in
+            DispatchQueue.main.async {
+                if let transcription = transcription {
+                    inputTextView.text = transcription
+                    self?.translate(transcription, inputLanguage: inputLanguage, outputLanguage: outputLanguage, outputTextView: outputTextView)
+                }
+                else if let error = error {
+                    self?.showError(message: error)
+                }
+            }
+        }
+    }
+
     // Translates the input text and displays it in the output text
     // Once the translation is completed, it is read aloud
-    func translate() {
-        guard
-            let inputLanguage = self.inputLanguagePickerController.selectedLanguage,
-            let outputLanguage = self.outputLanguagePickerController.selectedLanguage else {
-                self.showError(message: "Invalid language selections")
-                return
-        }
-
+    func translate(
+        _ text: String,
+        inputLanguage: Language,
+        outputLanguage: Language,
+        outputTextView: UITextView)
+    {
         translator.translate(
-            self.inputTextView.text,
+            text,
             inputLanguage: inputLanguage,
             outputLanguage: outputLanguage)
         {
@@ -111,7 +153,7 @@ class ViewController: UIViewController {
 
             DispatchQueue.main.async {
                 if let translation = translation {
-                    self?.outputTextView.text = translation
+                    outputTextView.text = translation
                     self?.speaker.readAloud(text: translation, language: outputLanguage)
                 }
                 else if let error = error {
