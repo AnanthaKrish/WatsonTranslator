@@ -41,6 +41,7 @@ class ViewController: UIViewController {
                 self.showError(message: "Invalid language selections")
                 return
         }
+        dismissKeyboard()
         transcribe(
             inputLanguage: inputLanguage,
             outputLanguage: outputLanguage,
@@ -50,7 +51,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func translateButtonLifted(_ sender: UIButton) {
-        view.sendSubviewToBack(fadedView)
+        self.showFadedView(false)
         listener.stopRecordingAudio()
     }
 
@@ -65,6 +66,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Call for Keyboard event listners
+        self.setUpKeyboard()
+        
         // Pause screen loading until supported input languages and translations are loaded
         while (!translator.translationsLoaded || !listener.inputLanguagesLoaded) { }
 
@@ -122,7 +126,7 @@ class ViewController: UIViewController {
         inputTextView: UITextView,
         outputTextView: UITextView)
     {
-        view.bringSubviewToFront(fadedView)
+        self.showFadedView(true)
         listener.startRecordingAudio(language: inputLanguage) { [weak self] transcription, error in
             DispatchQueue.main.async {
                 if let transcription = transcription {
@@ -167,5 +171,68 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    // Show Fade view
+    func showFadedView(_ show: Bool) {
+        
+        self.view.isUserInteractionEnabled = !show
+        if show {
+            view.bringSubviewToFront(fadedView)
+        } else {
+            view.sendSubviewToBack(fadedView)
+        }
+    }
+}
+
+
+extension ViewController:UITextViewDelegate {
+    
+    // show Keyboard event
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if self.view.frame.origin.y == 0 {
+            self.view.frame.origin.y -= 100
+        }
+    }
+    
+    // hide Keyboard event
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
+    /*TextView editing*/
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
+    /*Setup keyboard events*/
+    func setUpKeyboard() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        inputTextView.delegate = self
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    /*Dismiss keyboard*/
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    /*Remove NotificationCenter observers*/
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 }
